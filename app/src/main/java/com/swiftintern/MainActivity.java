@@ -16,7 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity
@@ -110,6 +115,9 @@ public class MainActivity extends ActionBarActivity
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
+
+        private ArrayAdapter<String> mOpportunityAdapter;
+
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -135,6 +143,24 @@ public class MainActivity extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            String[] opportunityArray = {
+                    "Web Development - New Delhi",
+                    "Graphic Design - Mumbai",
+                    "Customer Support - Delhi",
+                    "Event Management - Bangalore",
+                    "Software Development - Bangalore",
+                    "App Developer - Mumbai",
+                    "Social Media Marketing - Delhi"
+            };
+
+            List<String> opportunities = new ArrayList<String>(Arrays.asList(opportunityArray));
+
+            mOpportunityAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item_opportunities, R.id.list_item_opportunities_textview, opportunities);
+
+            ListView listView = (ListView) rootView.findViewById(R.id.listview_opportunities);
+            listView.setAdapter(mOpportunityAdapter);
+
             return rootView;
         }
 
